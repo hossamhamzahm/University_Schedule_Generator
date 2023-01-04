@@ -14,13 +14,7 @@ jobs:
       - node/install
       - checkout
       - aws-cli/setup
-      - eb/deploy:
-          context: aws-creds
-          environment-name: schedule-generator-dev
-          filters:
-            branches:
-              only:
-                - main
+      - eb/setup:
       # install dependencies in both apps
       # - run:
       #     name: install UI dependencies
