@@ -3,6 +3,7 @@ orbs:
   # orgs contain basc recipes and reproducible actions (install node, aws, etc.)
   node: circleci/node@4.1.0
   aws-cli: circleci/aws-cli@3.1.4
+  eb: circleci/aws-elastic-beanstalk@1.0.0
   # different jobs are called later in the workflows sections
 jobs:
   build:
@@ -13,19 +14,26 @@ jobs:
       - node/install
       - checkout
       - aws-cli/setup
+      - eb/deploy:
+          context: aws-creds
+          environment-name: schedule-generator-dev
+          filters:
+            branches:
+              only:
+                - main
       # install dependencies in both apps
-      - run:
-          name: install UI dependencies
-          command: |
-            npm run frontend:install
-      - run:
-          name: install Server dependencies
-          command: |
-            npm run api:install
-      - run:
-          name: Run backend build
-          command: |
-            npm run api:build
+      # - run:
+      #     name: install UI dependencies
+      #     command: |
+      #       npm run frontend:install
+      # - run:
+      #     name: install Server dependencies
+      #     command: |
+      #       npm run api:install
+      # - run:
+      #     name: Run backend build
+      #     command: |
+      #       npm run api:build
       - run:
           name: Deploy frontend & back
           command: |
