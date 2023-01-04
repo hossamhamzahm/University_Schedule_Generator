@@ -1,0 +1,29 @@
+{
+	"name": "database_project_aws_version",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"frontend:install": "cd frontend && npm install",
+		"frontend:deploy": "cd frontend && npm run deploy",
+		"api:install": "cd api && npm install",
+		"api:build": "cd api && npm run build",
+		"api:start": "cd api && npm run start",
+		"api:deploy": "cd api && npm run deploy",
+
+		"install": "npm run api:install && npm run frontend:install",
+		"build": "npm run api:build",
+		"deploy": "npm run api:deploy && npm run frontend:deploy"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/hossamhamzahm/Scheule-Generator.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/hossamhamzahm/Scheule-Generator/issues"
+	},
+	"homepage": "https://github.com/hossamhamzahm/Scheule-Generator#readme"
+}
