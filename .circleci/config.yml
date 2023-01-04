@@ -5,7 +5,7 @@ orbs:
   aws-cli: circleci/aws-cli@3.1.4
   eb: circleci/aws-elastic-beanstalk@1.0.0
   # different jobs are called later in the workflows sections
-jobs:
+  
   build:
     docker:
       # the base image can run most needed actions with orbs
@@ -13,8 +13,8 @@ jobs:
     steps:
       - node/install
       - checkout
-      # - aws-cli/setup
-      - eb/setup:
+      - aws-cli/setup
+      - eb/setup
       # install dependencies in both apps
       # - run:
       #     name: install UI dependencies
