@@ -1,0 +1,263 @@
+body{
+    background-image: url("../images/slider4.jpg");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+.layer{
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 100%;
+    background-attachment: fixed;
+}
+
+.navbar a{
+    color: white !important;
+}
+.dropdown-menu a{
+    color: black !important;
+}
+.navbar{
+    background-color: #0a7ef5 !important;
+}
+
+
+#courses h2{
+    font-size: 46px;
+    color: #0a7ef5;
+}
+#coursedetails h2{
+    font-size: 46px;
+    color: #0a7ef5;
+}
+.courseediting{
+  width: 100%;
+  height: 100%;
+  padding-top: 20%;
+}
+.course{
+    width: 80%;
+    height: 200px;
+    background-color: white;
+    margin: auto;
+    margin-top: 50px;
+    border-radius: 30px;
+    padding: 30px;
+}
+.course h3{
+    color: #0a7ef5;
+    font-size: 35px;
+}
+.course p{
+    margin-top: 20px;
+    width: 80%;
+    font-size: 24px;
+
+}
+.course button{
+    margin-left: 80%;
+    padding: 10px 20px;
+    border-style: none;
+    background-color: #0a7ef5;
+    color: white;
+    border-radius: 20px;
+    transition: all 0.2s;
+}
+.course button:hover{
+    background-color: #0c66c1;
+}
+
+#sections h2{
+    font-size: 46px;
+    color: #0a7ef5;
+}
+.section{
+    width: 80%;
+    height: 250px;
+    background-color: white;
+    margin: auto;
+    margin-top: 50px;
+    border-radius: 30px;
+    padding: 30px;
+}
+.section h3{
+    color: #0a7ef5;
+    font-size: 35px;
+}
+.section .d-flex p{
+    width: 20%;
+    font-size: 20px;
+}
+.section .time p{
+    width: 90%;
+    font-size: 20px;
+}
+.section p{
+    
+    font-size: 22px;
+    line-height: 22px;
+}
+.section button{
+    margin-left: 80%;
+    padding: 10px 20px;
+    border-style: none;
+    background-color: #0a7ef5;
+    color: white;
+    border-radius: 20px;
+    transition: all 0.2s;
+}
+.section button:hover{
+    background-color: #0c66c1;
+}
+#sectionsedit h2 {
+    font-size: 46px;
+    color: #0a7ef5;
+  }
+
+.sectionedit {
+    width: 80%;
+    height: 250px;
+    background-color: white;
+    margin: auto;
+    margin-top: 50px;
+    border-radius: 30px;
+    padding: 30px;
+}
+  .sectionedit h3 {
+    color: #0a7ef5;
+    font-size: 35px;
+  }
+  .sectionedit .d-flex p {
+    width: 20%;
+    font-size: 20px;
+  }
+  .sectionedit .time p {
+    width: 90%;
+    font-size: 20px;
+  }
+  .sectionedit p {
+    font-size: 22px;
+    line-height: 22px;
+  }
+  
+  .sectionedit .lbtn {
+    margin-left: 90%;
+    margin-top: -9%;
+    padding: 10px 20px;
+    border-style: none;
+    background-color: #0a7ef5;
+    color: white;
+    border-radius: 30px;
+    transition: all 0.2s;
+  }
+  .sectionedit .lbtn:hover {
+    background-color: #0c66c1;
+  }
+  
+  .sectionedit .my_btns {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .sectionedit .my_btns button {
+    padding: 10px;
+  }
+  .sectionedit .my_btns .btn-success {
+    width: 67px;
+    margin-right: 10px;
+    padding: 10px;
+  }
+  .my_btns {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .my_btns button {
+    padding: 10px;
+  }
+  .my_btns .btn-success {
+    width: 67px;
+    margin-right: 10px;
+    padding: 10px;
+  }
+  .containers {
+    flex-wrap: nowrap;
+    background: #e4f1ff;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-top: 40px;
+    transition: 2s width 0s, 5s height 2s;
+    
+  }
+  .containers:hover {
+    box-shadow: 5px 5px 50px rgb(202, 232, 255);
+  }
+  .whole {
+    display: flex;
+    height: 100vh;
+  }
+  .whole .left {
+    display: flex;
+    border-right: dashed white 3px;
+  }
+  .whole .left div {
+    color: #ffffff;
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 100px;
+  }
+  
+  .whole .left div img {
+    width: 100%;
+    height: 80%;
+  }
+  
+  .whole .right {
+    text-align: center;
+    color: #0a7ef5;
+  }
+  .whole .right .inside_right {
+    font-family: emoji;
+    margin-top: 50px;
+  }
+  .whole .right .inside_right .form-control {
+    width: 70%;
+  }
+  .whole .right .inside_right .mybtn {
+    display: inline-block;
+  }
+  #coursesedit h2 {
+    font-size: 46px;
+    color: #0a7ef5;
+  }
+  .courseedit {
+    width: 80%;
+    height: 200px;
+    background-color: white;
+    margin: auto;
+    margin-top: 50px;
+    border-radius: 30px;
+    padding: 30px;
+  }
+  .courseedit h3 {
+    color: #0a7ef5;
+    font-size: 35px;
+  }
+  .courseedit p {
+    margin-top: 20px;
+    width: 80%;
+    font-size: 24px;
+  }
+  .courseedit .lcbtn {
+    margin-left: 80%;
+    padding: 10px 20px;
+    border-style: none;
+    background-color: #0a7ef5;
+    color: white;
+    border-radius: 20px;
+    transition: all 0.2s;
+  }
+  .courseedit .lcbtn:hover {
+    background-color: #0c66c1;
+  }

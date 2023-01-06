@@ -1,96 +1,262 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-            crossorigin="anonymous"
-        />
-        <title>scheduling Algorithms Simulation</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/main.css">
     </head>
+    <body>
+        <div class="layer">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary position-fixed start-0 end-0 top-0 px-5 pb-3">
+                <div class="container-fluid">
+                  <a class="navbar-brand" href="#">HHEL University</a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                      <li class="nav-item">
+                        <a class="nav-link active navschedule d-none" aria-current="page" href="#">My Schedule</a>
+                      </li>
+                      <li class="nav-item navcourses d-none">
+                        <a class="nav-link" href="#" id="courseslink">Courses</a>
+                      </li>
+                      <li class="nav-item navcoursesedit d-none">
+                        <a class="nav-link" href="#" id="courseslink">Courses Edit</a>
+                      </li>
+                      <li class="nav-item navprofile d-none">
+                        <a class="nav-link d-none" href="#">Profile</a>
+                      </li>
+                      <li class="navlogin nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Login
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" id="adminlogin" href="#">As admin</a></li>
+                          <hr>
+                          <li><a class="dropdown-item" id="studentlogin" href="#">As student</a></li>
+                          
+                          
+                        </ul>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link d-none" id="logout" href="#">Log Out</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="register" href="#">Register</a>
+                      </li>
+                      
+                      
+                      
+                    </ul>
+                    
+                  </div>
+                </div>
+              </nav>
 
-    <body class="container mt-5">
-        <form action="">
-            <div class="row">
-                <div class="col-sm-12 col-md-6 col-lg-4 col-xl-2 my-2">
-                    <input type="number" class="form-control" name="id" placeholder="Process ID" aria-label="Process ID" />
-                </div>
-                <div class="col-sm-12 col-md-6 col-lg-4 col-xl-2 my-2">
-                    <input type="number" class="form-control" name="arrival" placeholder="Arrival Time" aria-label="Arrival Time" />
-                </div>
-                <div class="col-sm-12 col-md-6 col-lg-4 col-xl-2 my-2">
-                    <input type="number" class="form-control" name="burst" placeholder="Burst time" aria-label="Burst time" />
-                </div>
-                <div class="col-sm-12 col-md-6 col-lg-4 col-xl-2 my-2">
-                    <input type="number" class="form-control" name="priority" placeholder="Priority (if applicable)" aria-label="Priority" />
-                </div>
-                <div class="col-sm-12 col-md-6 col-lg-4 col-xl-2 my-2">
-                    <input type="number" class="form-control" name="quantum" placeholder="Quantum (if applicable)" aria-label="Quantum" />
-                </div>
-            </div>
 
-            <div class="row mt-4">
-                <div class="col-sm-12 col-md-6 col-lg-4 col-xl-2 my-2">
-                  <button id="create-btn" class="btn btn-primary">Create Process</button>
+              <div id="courses" class="mt-3 p-5 d-none" >
+                <h2 class="pt-5">Courses</h2>
+                <div class="container">
+                  
+                  
                 </div>
-            </div>
 
-            <div class="row mt-4">
-                <div class="col-sm-12 col-md-6 col-lg-4 col-xl-2 my-2">
-                  <select name="algo" class="form-select" aria-label="Default select example">
-                    <option selected>Select a Scheduling Algorithm</option>
-                    <option value="fcfs-non">FCFS [Non-Preemptive]</option>
-                    <option value="sjf-non">SJF [Non-Preemptive]</option>
-                    <option value="sjf-pre">SJF [Preemptive]</option>
-                    <option value="ljf-non">LJF [Non-Preemptive]</option>
-                    <option value="priority-non">Priority [Non-Preemptive]</option>
-                    <option value="rr">Round Robin [Preemptive]</option>
-                  </select>
+                
+                
+                
+              </div>
+              <div class="courseediting d-none">
+                
+              </div>
+              <div id="sections" class="mt-3 p-5 d-none">
+                <h2 class="pt-5">Course Sections</h2>
+                <div class="container">
+                  
+                  
+                  
+                  
+                </div>
+
               </div>
 
-                <div class="col-sm-12 col-md-6 col-lg-4 col-xl-2 my-2">
-                  <button id="run-algo-btn" class="btn btn-success">Run the Algorithm</button>
+              <div id="sectionsedit" class="mt-3 p-5 d-none">
+                <h2 class="pt-5">Course Sections</h2>
+                <div class="container">
+                  
+                  
+                  
+                  
                 </div>
+              </div>
+
+              
+              <div id="coursedetails" class="mt-3 p-5 d-none" >
+                <div class="container">
+                  <h2 class="pt-5">Courses</h2>
+                  <div class="course shadow-lg">
+                    <h3>ECEN311</h3>
+                    <p>Analog Design</p>
+                    <button class="">Course Sections</button>
+                  </div>
+              </div>
+        </div>
+
+        <div class="containers loginadmin whole rounded-pill d-none">
+          <div class="left col-6">
+            <div>
+              <!-- <h1>New Semeter Huh?</h6> -->
+              <img src="images/5469596-0١.png" alt="" />
+              <!-- <h1>Let's Make New Schedule</h4> -->
             </div>
-        </form>
+          </div>
+          <div class="right col-6 m-auto">
+            <div class="inside_right">
+              <h2>Login Admin Account</h2>
+              <form>
+                <div class="form-group">
+                  <input
+                    class="username form-control m-auto"
+                    placeholder="Username"
+                    type="text"
+                  />
+                  <p></p>
+                </div>
+                <div class="form-group">
+                  <input
+                    class="userpassword form-control m-auto"
+                    placeholder="Password"
+                    type="password"
+                  />
+                  <p></p>
+                </div>
+                <div class="form-group mybtn">
+                  <input class="signinbtn btn btn-primary" type="submit" value="Sign in" />
+                </div>
+                <div class="form-group mybtn">
+                  
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="containers loginstudent whole rounded-pill d-none">
+          <div class="left col-6">
+            <div>
+              <!-- <h1>New Semeter Huh?</h6> -->
+              <img src="images/5469596-0١.png" alt="" />
+              <!-- <h1>Let's Make New Schedule</h4> -->
+            </div>
+          </div>
+          <div class="right col-6 m-auto">
+            <div class="inside_right">
+              <h2>Login Student Account</h2>
+              <form>
+                <div class="form-group">
+                  <input
+                    class="form-control m-auto"
+                    placeholder="Username"
+                    type="text"
+                  />
+                  <p></p>
+                </div>
+                <div class="form-group">
+                  <input
+                    class="form-control m-auto"
+                    placeholder="Password"
+                    type="password"
+                  />
+                  <p></p>
+                </div>
+                <div class="form-group mybtn">
+                  <input class="signinbtn1 btn btn-primary" type="submit" value="Sign in" />
+                </div>
+                
+              </form>
+            </div>
+          </div>
+        </div>
+        <div id="coursesedit" class="mt-5 p-5 d-none">
+          <h2 class="pt-5">Courses</h2>
+          <div class="container">
 
-        <table class="table my-5">
-          <thead>
-            <tr>
-              <th scope="col">PID </th>
-              <th scope="col">Arrival Time</th>
-              <th scope="col">Burst Time</th>
-              <th scope="col">Priority</th>
-            </tr>
-          </thead>
+            </div>
+          </div>
+        
+        <div class="containers reg whole rounded-pill d-none">
+          <div class="left col-6">
+            <div>
+              <!-- <h1>New Semeter Huh?</h6> -->
+              <img src="images/5469596-0١.png" alt="" />
+              <!-- <h1>Let's Make New Schedule</h4> -->
+            </div>
+          </div>
+          <div class="right col-6 m-auto">
+            <div class="inside_right">
+              <form>
+                <div class="form-group">
+                  <input
+                    class="usr form-control m-auto"
+                    placeholder="Username"
+                    type="text"
+                  />
+                  <p></p>
+                </div>
+                <div class="form-group">
+                  <input
+                    class="fname form-control m-auto"
+                    placeholder="First Name"
+                    type="text"
+                  />
+                  <p></p>
+                </div>
+                <div class="form-group">
+                  <input
+                    class="mname form-control m-auto"
+                    placeholder="Middle Name"
+                    type="text"
+                  />
+                  <p></p>
+                </div>
+                <div class="form-group">
+                  <input
+                    class="lname form-control m-auto"
+                    placeholder="Last Name"
+                    type="text"
+                  />
+                  <p></p>
+                </div>
+                <div class="form-group">
+                  <input
+                    class="major form-control m-auto"
+                    placeholder="Major"
+                    type="text"
+                  />
+                  <p></p>
+                </div>
+                <div class="form-group">
+                  <input
+                    class="pass form-control m-auto"
+                    placeholder="Password"
+                    type="password"
+                  />
+                  <p></p>
+                </div>
+      
+                <div class="form-group mybtn">
+                  <input class="upbtn btn btn-danger" type="submit" value="Sign up" />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
 
-          <tbody>
-            
-          </tbody>
-        </table>
 
-        <table id="result-table" class="table my-5">
-          <thead>
-            <tr>
-              <th scope="col">PID </th>
-              <th scope="col">Turn Around Time</th>
-              <th scope="col">Wait Time</th>
-            </tr>
-          </thead>
 
-          <tbody>
-          </tbody>
-        </table>
 
-        <script src="out/bundle.js"></script>
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous"
-        ></script>
+
+
+        
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/jquery-3.6.1.js"></script>
+        <script src="js/main.js"></script>
     </body>
 </html>
