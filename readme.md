@@ -12,20 +12,17 @@
 #### Screenshots of the infrastructure needs (RDS, S3, Elastic Beanstalk, etc) are found the [docs directory](https://github.com/hossamhamzahm/fwd-last-project/tree/main/docs) in the Github repository
 
 
-#### Documentation of the infrastructure needs:
-    - Frontend code is hosted on a S3 bucket and served as a static website
-    - Backend APIs are hosted on an eb with all needed environment variables and configurations
-    - The database instance is Mysql database hosted on Amazon RDS
-    - The process goes as the following:
-        - Client requests the frontend code form the S3 bucket 
-        - After the client receives the frontend code, the frontend code requests the api
-        - The API queries the RDS then responds to the frontend
+#### Documentation of the infrastructure is found in the [infrastructure description.md](https://github.com/hossamhamzahm/fwd-last-project/blob/main/docs/Infrastructure%20description.md) file in the docs directory
+
+
+
+#### Documentation of all dependencies is found in the [App dependencies.md](https://github.com/hossamhamzahm/fwd-last-project/blob/main/docs/App%20dependencies.md) file in the docs directory
 
 
 #### A screenshot of the last build is found the [docs directory](https://github.com/hossamhamzahm/fwd-last-project/tree/main/docs) in the Github repository 
 
 
-#### Documentation of the pipeline found in the [Pipeline process.md](https://github.com/hossamhamzahm/fwd-last-project/tree/main/docs) file in the docs directory
+#### Documentation of the pipeline is found in the [Pipeline process.md](https://github.com/hossamhamzahm/fwd-last-project/blob/main/docs/Pipeline%20process.md) file in the docs directory
 
 
 > Click on the status icon to view the pipeline
