@@ -9,7 +9,7 @@
 		"build": "tsc",
 		"start": "npm install && node dist/index.js",
 		"deploy": "eb list && eb use schedule-generator-dev && eb deploy",
-		"set_env": "chmod +x set_env.sh && ./set_env",
+		"set_env": "chmod +x set_env.sh && ./set_env.sh",
 		"migrate": "db-migrate --env dev reset && db-migrate --env dev up && ENV=dev ts-node src/seeds/index.ts"
 	},
 	"keywords": [],
