@@ -25,21 +25,11 @@
 #### A screenshot of the last build is found the [docs directory](https://github.com/hossamhamzahm/fwd-last-project/tree/main/docs) in the Github repository 
 
 
-#### Documentation of the pipeline:
-    - Circleci is triggered once a new commit is pushed to Github and starts the pipeline process
-    - Spin up the environment and setup environment variables
-    - Install node, NPM, AWS CLI, EB CLI
-    - Configure AWS credentials
-    - Install UI Dependencies
-    - Install Server Dependencies
-    - Run Builds
-    - Deploy frontend & backend:
-        - Deploy frontend to S3 bucket
-        - Deploy backend to eb
+#### Documentation of the pipeline found in the [Pipeline process.md](https://github.com/hossamhamzahm/fwd-last-project/tree/main/docs) file in the docs directory
 
 
 > Click on the status icon to view the pipeline
-[![Status Badge](https://circleci.com/gh/hossamhamzahm/fwd-circleci-training.svg?style=svg)](https://app.circleci.com/pipelines/github/hossamhamzahm/fwd-circleci-training/13/workflows/78d52ac1-94a7-452e-940f-9f1b37cfa125/jobs/13)
+[![Status Badge](https://circleci.com/gh/hossamhamzahm/fwd-circleci-training.svg?style=svg)](https://app.circleci.com/pipelines/github/hossamhamzahm/fwd-last-project/19/workflows/b108f94f-fdc1-4481-8fba-52e3439ce6ea/jobs/13)
 
 
 #### Architecture diagram for an overview of the infrastructure and the pipeline
