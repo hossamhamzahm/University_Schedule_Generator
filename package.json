@@ -10,6 +10,7 @@
 		"api:build": "cd api && npm run build",
 		"api:start": "cd api && npm run start",
 		"api:deploy": "cd api && npm run deploy",
+		"api:set_env": "cd api && npm run set_env",
 
 		"install": "npm run api:install && npm run frontend:install",
 		"build": "npm run api:build",
