@@ -10,11 +10,6 @@ jobs:
     docker:
       # the base image can run most needed actions with orbs
       - image: "cimg/base:stable"
-    #  configure the pipeline so that only pushes to the main/master branch would trigger build
-    filters:
-      branches:
-        only:
-          - main
     steps:
       - node/install
       - checkout
@@ -42,3 +37,13 @@ jobs:
           name: set backend environment variables 
           command: |
             npm run api:set_env
+
+workflows:
+  build:
+    jobs:
+      - build:
+          #  configure the pipeline so that only pushes to the main/master branch would trigger build
+          filters:
+            branches:
+              only:
+                - main
