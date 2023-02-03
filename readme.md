@@ -6,8 +6,7 @@
 
 > Note: No sensitive data in are hardcoded in the code, instead it is passed through the environment variables in both amazon eb and circle ci [screenshots of both are in docs directory](https://github.com/hossamhamzahm/fwd-last-project/tree/main/docs)
 
-> Note: I have deployed my own application, which has no tests to run, but I got the idea of running tests in the pipeline. I couldn't deploy udagram because it shows a huge amount of errors and there is no time to fix them as I have to finish the program before the 10th of January and I couldn't finish it earlier because of my university exams.
-
+> Note: to setup the api locally follow the setting in the  [configure local server.md](https://github.com/hossamhamzahm/University_Schedule_Generator/blob/main/docs/configure%20local%20server.md) in docs directory.
 
 #### Screenshots of the infrastructure needs (RDS, S3, Elastic Beanstalk, etc) are found the [docs directory](https://github.com/hossamhamzahm/fwd-last-project/tree/main/docs) in the Github repository
 
