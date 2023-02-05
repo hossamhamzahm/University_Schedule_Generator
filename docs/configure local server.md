@@ -24,6 +24,7 @@ DB_PASSWORD=replace_with_password_created_above
 DB_HOST=localhost
 DB_NAME=schedule_generator
 DB_PORT=3306
+ENV=dev
 ``` 
 
 > the `.env` file contains the necessary data to connect to mysql and without it, no interaction can be done with the database.
