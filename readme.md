@@ -3,6 +3,9 @@
 ### Project Idea
 This project focuses on building a schedule generator that generates all possible schedules for a prescribed list of courses entered by the user (using backtracking algorithm), then storing this list in a database. The generated schedules should have no conflicts or issues within it.
 
+
+> Note: AWS links stopped working because AWS free tier has ended.
+
 ### Main objectives
     - Registering and saving users.
     - Saving all courses with their different sections, tutorials and labs.
