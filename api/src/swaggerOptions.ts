@@ -10,14 +10,13 @@ const swaggerOptions: swaggerJSDoc.Options = {
 		},
 		servers: [
 			{
-				url: process.env.URL,
+				url: "http://localhost:3000/",
 			},
 		],
 	},
 
-	apis: ["./src/**/*.ts", "./dist/**/*.js"],
+	apis: ["./src/**/*.ts"],
 };
-
 
 
 export default swaggerOptions;
