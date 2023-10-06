@@ -1,17 +1,46 @@
-const wrapAsync = function <T>(fn: (...args: any[]) => Promise<T>): (...args: any[]) => Promise<T> {
-	return async (...args: any[]) => {
-		try{
-		return await fn(...args);
-		}
-		catch(e: unknown){
-		    // if(process.env.ENV  == 'dev') console.error("An error happened:", (e as Error).message);
-            // if(args[1]) return args[1].status(500).send({ error: e });
-			
-			// @ts-ignore
-			if(e.sqlMessage) e.msg = e.sqlMessage;
-			if(args[2]) args[2](e)
-		}
-	};
-};
+import express from "express";
+import Sequelize from "sequelize";
+import ExpressError from "./ExpressError";
+import User from "../model/user";
 
-export default wrapAsync;
+
+
+export default function <T>(
+	fn: (req: express.Request, res: express.Response, next: express.NextFunction) => Promise<T>
+): (...args: any[]) => Promise<T | void> {
+	return async (req, res, next) => {
+		try {
+			return await fn(req, res, next);
+		} catch (e: unknown) {
+            // checking if this is a sequelize error
+            if (e instanceof Sequelize.BaseError) {
+                // e.message += e.parent.sqlMessae
+                if (e instanceof Sequelize.ConnectionError){
+                    next(new ExpressError(e.message, 500));
+                }
+                if (e instanceof Sequelize.ValidationError){
+                    for(let error of e.errors){
+                        e.message += ", " + error.message
+                        
+                        if (e.name === "SequelizeUniqueConstraintError"){
+                            if (error.instance instanceof User) 
+                                e.message += ", This username is already taken."
+                        }
+                    }
+                    next(new ExpressError(e.message, 400));
+                }
+                else next(new ExpressError(e.message, 500));
+            }
+            else if (e instanceof ExpressError){
+                next(e);
+            }
+            else if (e instanceof Error){
+                next(new ExpressError(e.message, 400));
+            }
+            else{
+                next(e);
+            }
+
+        }
+	};
+}

@@ -1,34 +1,63 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Response } from "express";
 import bcrypt from 'bcrypt';
-import { Student, StudentStore } from "../model/student";
+import User from "../model/user";
+import Student from "../model/student";
 import ExpressError from "../helper/ExpressError";
-import StudentService from '../service/student'
-import jwt from "jsonwebtoken";
+import { sign } from '../service/student'
+import Config from "../config";
+import StudentJoiSchema from "../schema/student"
+import sequelize from "../model/database";
+import Request from "../@types/express"
+import LoggedJwt from "../model/logged_jwt";
 
 
 
-declare global {
-	namespace Express {
-		export interface Request {
-			student_username?: string;
-		}
+// [POST] /students
+const signup = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
+	const student = (await StudentJoiSchema.validateAsync(req.body)).student;
+
+	const needs_hashing = student.student_password + Config.bcrypt_pepper;
+	student.hashed_password = await bcrypt.hashSync(needs_hashing, Config.salt_rounds)
+
+	if (student.can_edit) delete student['can_edit']
+
+	const transaction = await sequelize.transaction();
+	try {
+		const user = await User.create({ 
+			user_username: student.student_username, 
+			f_name: student.f_name,
+			m_name: student.m_name,
+			l_name: student.l_name, 
+		}, { transaction });
+
+		delete student['f_name'];
+		delete student['m_name'];
+		delete student['l_name'];
+
+		const result = await Student.create(student, {transaction});
+		await transaction.commit();
 	}
-}
-
-
-// [POST] /signup
-const signup = async (req: Request, res: Response): Promise<void> => {
-	const student: Student = req.body.student;
-
-	const needs_hashing = student.student_password + (process.env.BCRYPT_PEPPER as string);
-	const salt_rounds: number = parseInt(process.env.SALT_ROUNDS as string);
-	student.hashed_password = await bcrypt.hashSync(needs_hashing, salt_rounds)
+	catch(e: unknown){
+		await transaction.rollback();
+		throw e;
+	}
 	
-	const studentStore = new StudentStore();
-	const result = await studentStore.create(student);
-	
-	const AccessToken = await StudentService.sign(student.student_username);
-	res.send({ AccessToken });
+	const AccessToken = await sign(student.student_username);
+	res.status(201).send({ AccessToken });
+};
+
+
+const remove = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
+	const { student_username } = req.params;
+
+	if(req.student_username != student_username){
+		throw new ExpressError("Unauthorized Request", 403);
+	}
+
+	const result = await User.destroy({where: {user_username: student_username}});
+
+	if (result != 1) throw new ExpressError("User not found", 404);
+	res.status(200).send({ msg: "Student removed successfully" });
 };
 
 
@@ -36,51 +65,44 @@ const signup = async (req: Request, res: Response): Promise<void> => {
 
 // [POST] /login
 const login = async (req: Request, res: Response): Promise<void> => {
-	const {student_username, student_password} = req.body.student;
+	const { student_username, student_password } = req.body.student;
 
-	const needs_hashing = student_password + (process.env.BCRYPT_PEPPER as string);
-	const studentStore = new StudentStore();
-	const result = await studentStore.show(student_username);
+	const needs_hashing = student_password + Config.bcrypt_pepper;
 
-	if(!result.length) throw new ExpressError("User Not Found", 404); 
-	
-	const student = result[0];
-	const password_comparison = await bcrypt.compareSync(needs_hashing, student.hashed_password)
+	const student = await Student.findByPk(student_username);
 
-	if(!password_comparison) throw new ExpressError('Incorrect Password', 403)
-	
-	const AccessToken = await StudentService.sign(student.student_username);
+	if (!student) throw new ExpressError('Wrong username or password', 403);
+
+	const password_comparison = await bcrypt.compareSync(needs_hashing, student.getDataValue("hashed_password"))
+
+	if (!password_comparison) throw new ExpressError('Wrong username or password', 403);
+
+	const AccessToken = await sign(student_username);
 	res.send({ AccessToken });
 };
 
 
-
-const isAuthenticated = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-	if (!req.headers.authorization) throw new ExpressError("Unauthorized, Please Login", 403);
-	
+// [POST] /logout
+const logout = async (req: Request, res: Response): Promise<void> => {
+	if (!req.headers.authorization) throw new ExpressError("Unauthorized, please login first", 401)
 	const token = req.headers.authorization?.split(' ')[1];
-	if (!token) throw new ExpressError("Unauthorized, Please Login", 403);
 
-	const access_token_secret = process.env.ACCESS_TOKEN_SECRET as string;
+	await LoggedJwt.destroy({ where: { token } });
+	if (req.student_username) delete req["student_username"];
 
-	let jwt_payload: { student_username: string; iat: number; exp: number };
-	try{
-		jwt_payload = (await jwt.verify(token, access_token_secret)) as unknown as {student_username: string; iat: number;exp: number;};
-	}
-	catch(e){
-		// @ts-ignore
-		throw new ExpressError(e.message + ', Please log in again', 403)
-	}
-	req.student_username  = jwt_payload.student_username;
+	res.status(200).send({ msg: "Logged out successfully" });
+};
 
-	return next();
-}
+
+
+
 
 
 export default {
 	signup,
 	login,
-	isAuthenticated
+	logout,
+	remove
 };
 
 

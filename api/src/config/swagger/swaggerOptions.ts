@@ -1,4 +1,5 @@
 import swaggerJSDoc from "swagger-jsdoc";
+import config from "..";
 
 
 const swaggerOptions: swaggerJSDoc.Options = {
@@ -10,12 +11,12 @@ const swaggerOptions: swaggerJSDoc.Options = {
 		},
 		servers: [
 			{
-				url: "http://localhost:3000/",
+				url: config.url,
 			},
 		],
 	},
 
-	apis: ["./src/**/*.ts"],
+	apis: ["./src/config/**/*.yaml", "./config/**/*.yaml"], // "./**/*.ts", 
 };
 
 
